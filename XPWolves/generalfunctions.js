@@ -217,6 +217,7 @@ async function Kill(UserID, GuildID, client, guild = null, Cause = ""){
     const channels = await guild.channels.cache
     for (const channel of channels.values()) 
     {
+        if (!channel.permissionOverwrites) continue;
         removeFromChannelWriting(UserID, channel)
     }
     

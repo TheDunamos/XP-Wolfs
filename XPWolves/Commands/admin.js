@@ -277,6 +277,9 @@ module.exports = {
                         case 'protect':
                             HandleProtect(options, guild, interaction, client)
                             break;
+                        case 'get_alive_players':
+                            HandleGetAlivePlayers(guild, interaction, client)
+                            break;    
                         case 'block':
                             HandleBlock(options, guild, interaction, client)
                             break;
@@ -291,6 +294,13 @@ module.exports = {
         eventBus.subscribe("presend", sendPresendMessages);
     }
 }
+
+async function HandleGetAlivePlayers(guild, interaction, client)
+{
+    const alivePlayers = await users.find({guildID: guild.id, dead: false});
+    await gen.reply(interaction, `Alive players:\n ${alivePlayers.map(player => gen.getName(interaction, player._id)).join(",\n ")}`)
+}
+
 
 async function HandleKill(interaction, options, guild, client)
 {
