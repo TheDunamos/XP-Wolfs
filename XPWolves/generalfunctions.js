@@ -21,8 +21,8 @@ async function reply(interaction, msg, private = true){
 
 //Reply to command
 async function noReply(interaction){
-    interaction.deferReply();
-    interaction.deleteReply();
+    await interaction.deferReply();
+    await interaction.deleteReply();
 }
 
 //Dont reply to command
@@ -230,6 +230,7 @@ async function Revive(UserID, guild, client){
     const channels = await guild.channels.cache
     for (const channel of channels.values()) 
     {
+        if (!channel.permissionOverwrites) continue;
         channel.permissionOverwrites.edit(UserID, 
             {
                 SendMessages: true,

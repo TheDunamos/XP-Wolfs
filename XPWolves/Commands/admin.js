@@ -227,7 +227,6 @@ module.exports = {
                             return;
                         case "revive":
                             await gen.Revive(options.getUser("target").id, guild, client);
-                            gen.noReply(interaction)
                             return;
                         case "force_join":
                             await handleForceJoin(options.getUser("target").id, guild, interaction, client);
@@ -305,7 +304,7 @@ async function HandleGetAlivePlayers(guild, interaction, client)
 async function HandleKill(interaction, options, guild, client)
 {
     await gen.Kill(options.getUser("target").id, guild.id, client, guild);
-    gen.noReply(interaction)
+    
 }
 
 async function HandleAddToKilledOverNight(interaction, options, guild, client)
